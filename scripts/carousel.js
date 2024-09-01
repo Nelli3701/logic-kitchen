@@ -33,7 +33,7 @@ const renderSlides = () => {
 
 const renderNavBtn = (index) => {
     const navBtnTemplate = `
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" class="${index === currentImageIndex ? 'active' : ''}" aria-current="true" aria-label="Slide ${index}"></button>
+    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="${index}" class="${index === currentImageIndex ? 'active' : ''}" aria-current="true" aria-label="Slide ${index}"></button>
     `;
     carouselIndicatorsEl.insertAdjacentHTML('beforeend', navBtnTemplate);
 };
@@ -57,26 +57,33 @@ const startAutoSwitch = () => {
 };
 
 // Обработчики событий для переключения изображений
-nextSlideBtn.addEventListener('click', () => {
+nextSlideBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Click next');
     clearInterval(autoSwitchInterval); // Отключаем автоматическую смену при клике
     const project = projectData[currentProjectIndex];
+    // Переход к следующему проекту или зацикливание
     if (currentProjectIndex < projectData.length - 1) {
         currentProjectIndex++;
     } else {
-        return; // Если это последний проект, не переключаем
+        currentProjectIndex = 0; // Зацикливаемся на первом проекте
     }
+    
     currentImageIndex = 0; // сброс текущего изображения
     renderSlides();
     startAutoSwitch(); // Запускаем автоматическую смену для нового проекта
 });
 
-prevSlideBtn.addEventListener('click', () => {
+prevSlideBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     clearInterval(autoSwitchInterval); // Отключаем автоматическую смену при клике
+    // Переход к предыдущему проекту или зацикливание
     if (currentProjectIndex > 0) {
         currentProjectIndex--;
     } else {
-        return; // Если это первый проект, не переключаем
+        currentProjectIndex = projectData.length - 1; // Зацикливаемся на последнем проекте
     }
+    
     currentImageIndex = 0; // сброс текущего изображения
     renderSlides();
     startAutoSwitch(); // Запускаем автоматическую смену для нового проекта
@@ -85,8 +92,10 @@ prevSlideBtn.addEventListener('click', () => {
 // События для индикаторов (переключение изображений в одном проекте)
 carouselIndicatorsEl.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
+        clearInterval(autoSwitchInterval); // Отключаем автоматическую смену при клике
         currentImageIndex = parseInt(e.target.getAttribute('data-bs-slide-to'));
         renderSlides();
+        startAutoSwitch();
     }
 });
 
