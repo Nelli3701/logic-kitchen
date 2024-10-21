@@ -1,0 +1,26 @@
+[
+        {
+            "tab": "Фасады",
+            "items": [
+                {"name": "МДФ", "image": "img/pryamaya-kuhnya.png", "hoverImg": "img/brown-cat-cute.jpg"},
+                {"name": "МДФ", "image": "img/pryamaya-kuhnya.png", "hoverImg": "img/brown-cat-cute.jpg"},
+                {"name": "МДФ", "image": "img/pryamaya-kuhnya.png", "hoverImg": "img/brown-cat-cute.jpg"},
+                {"name": "МДФ", "image": "img/pryamaya-kuhnya.png", "hoverImg": "img/brown-cat-cute.jpg"}
+            ]
+        },
+        {
+            "tab": "Столешница",
+            "items": [
+                {"name": "ЛДСП", "image": "img/brown-cat-cute.jpg", "hoverImg": "img/pryamaya-kuhnya.png"},
+                {"name": "ЛДСП", "image": "img/big-cat.jpg", "hoverImg": "img/pryamaya-kuhnya.png"}
+            ]
+        },
+        {
+            "tab": "Фурнитура",
+            "items": []
+        },
+        {
+            "tab": "Наполнение",
+            "items": []
+        }
+    ]
