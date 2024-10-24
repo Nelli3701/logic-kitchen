@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Валидация форм
-    /*
 
     const forms = document.querySelectorAll('.main-form');
 
@@ -139,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             // Не сбрасываем рамку
         });
-    }); */
+    });
 });
 
 

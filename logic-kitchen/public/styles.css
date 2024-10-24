@@ -59,6 +59,26 @@ small {
     text-shadow: 3px 1px 2px white;
 }
 
+.blue-background .page-content {
+    background-color: #03dffc5d;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+p.service-page {
+    font-size: 30px;
+}
+
+ul.service-page {
+    list-style-position: inside;
+    padding-top: 1%;
+}
+
+ul.service-page li {
+    font-size: 20px;
+    padding-top: 3%;
+}
+
 h3 {
     font-size: 40px;
     font-weight: 600;
@@ -124,7 +144,9 @@ header.main-header {
     padding: 1% 0;
 }
 
-
+p.service-page {
+    font-size: 40px;
+}
 
 .contacts {
     display: flex;
@@ -785,6 +807,7 @@ select {
     border-radius: 10px;
     border: 1px solid gray;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .present-form p {
@@ -804,12 +827,12 @@ select {
 }
 
 @media screen and (max-width: 960px) {
-    .main-banner-text {
+    .main-banner-text, h1 {
         font-size: 3.5em;
         padding: 10% 0 5%;
     }
 
-    .banner-desc {
+    .banner-desc, p.service-page {
         font-size: 1.5em;
     }
 
@@ -845,7 +868,7 @@ select {
 
 @media screen and (max-width: 730px) {
 
-    .main-banner-text {
+    .main-banner-text, h1 {
         font-size: 3em;
     }
 
@@ -1007,7 +1030,7 @@ select {
 }
 
 @media screen and (max-width: 640px) {
-    .main-banner-text {
+    .main-banner-text, h1 {
         font-size: 2.5em;
     }
 
@@ -1070,14 +1093,19 @@ select {
     }
 
     .main-banner-text,
+    h1,
     h2,
     .h2 {
         font-size: 1.8em;
         line-height: 50px;
     }
 
-    .banner-desc {
+    .banner-desc, p.service-page {
         font-size: 1.3em;
+    }
+
+    ul.service-page li {
+        font-size: 1.1em;
     }
 
     .cat-list {
@@ -1138,6 +1166,7 @@ select {
     }
 
     .main-banner-text,
+    h1,
     h2,
     .h2 {
         max-width: 96%;

@@ -23,7 +23,7 @@
 
             </header>
             <div class="page-content">
-                @if (!request()->is('/'))
+                @if (!request()->is('/') && !isset($hideTitle))
                 <h1 class="container">{{ $name ?? 'Logic Kitchen' }}</h1>
                 @endif
                 @yield('page-content')

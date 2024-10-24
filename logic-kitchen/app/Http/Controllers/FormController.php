@@ -6,34 +6,68 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Mail\FormSubmission;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
     public function postForm(Request $request)
     {
-        try {
-            if ($request->has('form_type')) {
-                switch ($request->input('form_type')) {
-                    case 'mainform':
-                        echo $request->input('name');
-                        echo $request->input('phone');
-                        break;
-                    case 'giftform':
-                        echo $request->input('gift');
-                        echo $request->input('name');
-                        echo $request->input('phone');
-                        break;
-                    default:
-                        echo 'Unknown form type';
-                        break;
-                }
-            }
-            $request->validate([
-                'name' => 'required',
-                'phone' => 'required|regex:/\+7-\d{3}-\d{3}-\d{2}-\d{2}/'
-            ]);
-        } catch (ValidationException $e) {
-            echo $e->getMessage();
+        // Валидация данных
+        $request->validate([
+            'name' => 'required|string|max:50|min:1',
+            'phone' => 'required|regex:/^\+7\(\d{3}\) \d{3}-\d{2}-\d{2}$/',
+            'gift' => 'nullable|string|max:20|min:1',
+            'form_type' => 'required|string'
+        ]);
+
+        // Логика обработки в зависимости от формы
+        $data = [
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+        ];
+
+        if ($request->input('form_type') === 'giftform') {
+            $data['gift'] = $request->input('gift');
+        }
+
+        // Отправка почты
+        Mail::to('logic-kitchen@yandex.ru')->send(new FormSubmission($data));
+
+        //return response()->json($data);
+        return redirect()->route('thankyou');
+    }
+}
+
+
+/*class FormController extends Controller
+{
+    public function postForm(Request $request)
+    {
+        // Валидация данных
+        $request->validate([
+            'name' => 'required|string|max:50|min:1',
+            'phone' => 'required|regex:/^\+7\(\d{3}\) \d{3}-\d{2}-\d{2}$/',
+            'gift' => 'nullable|string|max:20|min:1',
+            'form_type' => 'required|string'
+        ]);
+
+        // Логика обработки в зависимости от формы
+        switch ($request->input('form_type')) {
+            case 'mainform':
+                return response()->json([
+                    'name' => $request->input('name'),
+                    'phone' => $request->input('phone'),
+                ]);
+            case 'giftform':
+                return response()->json([
+                    'gift' => $request->input('gift'),
+                    'name' => $request->input('name'),
+                    'phone' => $request->input('phone'),
+                ]);
+            default:
+                return response()->json(['error' => 'Unknown form type'], 400);
         }
     }
 }
+*/

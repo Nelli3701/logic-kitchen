@@ -23,3 +23,6 @@ Route::post('/submit-form', [FormController::class, 'postForm'])->name('post_for
 Route::get('/soglasie', function () {
     return view('soglasie', ['name' => 'Политика обработки персональных данных']);
 });
+Route::get('/thankyou', function () {
+    return view('thankyou');
+});

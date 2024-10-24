@@ -9,11 +9,11 @@
             <option value="Смеситель">Смеситель</option>
             <option value="Фильтр для воды">Фильтр для воды</option>
         </select>
-        <input type="text" name="name" class="name" placeholder="Как к вам обращаться?*" required>
+        <input type="text" name="name" class="name" placeholder="Как к вам обращаться?*" value="{{ old('name') }}" required max="50" min="1">
         @error('name')
         <small class="red-text">{{ $message }}</small>
         @enderror
-        <input type="tel" name="phone" class="phone-mask" placeholder="Введите телефон*" required>
+        <input type="tel" name="phone" class="phone-mask" placeholder="Введите телефон*" value="{{ old('phone') }}" required>
         @error('phone')
         <small class="red-text">{{ $message }}</small>
         @enderror
